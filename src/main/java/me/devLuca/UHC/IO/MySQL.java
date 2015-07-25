@@ -42,4 +42,31 @@ public class MySQL {
         return false;
     }
 
+    public void createPlayer(Player p) {
+        try {
+
+            PreparedStatement statement = connection.prepareStatement("insert into data_Players (UUID, Name, Rank, BannedUntil, Kills, Deaths, Money) values ('" + p.getUniqueId().toString() + "', '" + p.getName() + "', 'Player', 'noBan', 0, 0, 100);");
+            statement.executeUpdate();
+            statement.close();
+
+        } catch (Exception ex) {
+        }
+    }
+
+
+    public ResultSet getPlayerData(Player p) {
+        try {
+
+            if (!playerDataContainsPlayer(p)) {
+                createPlayer(p);
+            }
+
+            PreparedStatement statement = connection.prepareStatement("select * from data_Players where UUID='" + p.getUniqueId() + "';");
+            return statement.executeQuery();
+
+        } catch (Exception ex) {
+        }
+        return null;
+    }
+
 }
