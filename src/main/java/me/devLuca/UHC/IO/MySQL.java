@@ -53,6 +53,9 @@ public class MySQL {
         }
     }
 
+    public void banPlayer(Player p) {
+
+    }
 
     public ResultSet getPlayerData(Player p) {
         try {
